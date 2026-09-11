@@ -15,13 +15,12 @@ PEOPLE.forEach(p => {
   } catch (e) {}
 });
 
-// audio custom per track (localStorage) — key: "porto_audio_{namaOrang}_{judulLagu}"
+// audio custom per track
 const AUDIO_LS_PREFIX = "porto_audio_";
 const uploadedAudio = {};
 function audioKey(ownerName, trackTitle){
   return AUDIO_LS_PREFIX + ownerName + "__" + trackTitle;
 }
-// load semua audio yang tersimpan
 try {
   for (let i = 0; i < localStorage.length; i++){
     const k = localStorage.key(i);
@@ -31,7 +30,7 @@ try {
   }
 } catch (e) {}
 
-// cover custom per track (localStorage)
+// cover custom per track
 const COVER_LS_PREFIX = "porto_cover_";
 const uploadedCovers = {};
 try {
@@ -52,7 +51,6 @@ const tabsEl = document.getElementById("tabs");
 const contentEl = document.getElementById("content");
 const toastEl = document.getElementById("toast");
 
-// player bar
 const spPlayer = document.getElementById("spPlayer");
 const spAudio = document.getElementById("spAudio");
 const spPlayerArt = document.getElementById("spPlayerArt");
@@ -95,10 +93,9 @@ function showToast(msg, type = ""){
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toastEl.className = "toast " + type;
-  }, 2200);
+  }, 2600);
 }
 
-// kompres gambar
 function resizeImage(file, maxSize = 400, quality = 0.85){
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -158,9 +155,9 @@ function openPlayer(track){
     spCurrent.textContent = "0:00";
     spDuration.textContent = track.duration || "0:00";
     spProgressFill.style.width = "0%";
+    showToast(`Belum ada file audio untuk "${track.title}" — upload dulu`, "error");
   }
 
-  // update UI di section musik kalau sedang buka tab musik
   if (activeTab === "musik"){
     updateNowPlayingUI();
     updateTrackHighlight();
@@ -181,7 +178,7 @@ function togglePlayPause(){
     showToast("Belum ada file audio untuk track ini. Upload dulu di section Musik.", "error");
     return;
   }
-  if (spAudio.src !== src){ spAudio.src = src; }
+  if (spAudio.src !== src) spAudio.src = src;
   if (spAudio.paused){ spAudio.play(); spPlayBtn.textContent = "⏸"; }
   else { spAudio.pause(); spPlayBtn.textContent = "▶"; }
 }
@@ -193,7 +190,6 @@ function findNextTrack(direction){
   const list = owner.music.playlist;
   const idx = list.findIndex(t => t.title === currentTrack.title);
   if (idx === -1) return null;
-
   if (isShuffle && list.length > 1){
     let n = Math.floor(Math.random() * list.length);
     while (n === idx) n = Math.floor(Math.random() * list.length);
@@ -257,7 +253,6 @@ spAudio.addEventListener("ended", () => {
   else { spPlayBtn.textContent = "▶"; spProgressFill.style.width = "0%"; }
 });
 
-// klik progress bar di player bawah buat seek
 spProgressBar.addEventListener("click", (e) => {
   if (!spAudio.duration) return;
   const rect = spProgressBar.getBoundingClientRect();
@@ -265,7 +260,6 @@ spProgressBar.addEventListener("click", (e) => {
   spAudio.currentTime = pct * spAudio.duration;
 });
 
-// keyboard shortcut global
 document.addEventListener("keydown", (e) => {
   const tag = (e.target.tagName || "").toUpperCase();
   if (tag === "INPUT" || tag === "TEXTAREA" || e.target.isContentEditable) return;
@@ -535,8 +529,10 @@ function paneMusikHTML(p){
 
   const coverKey = COVER_LS_PREFIX + p.name + "__" + (nowTrack?.title || "");
   const coverSrc = nowTrack ? uploadedCovers[coverKey] : null;
-
   const playing = currentTrack && currentTrack.ownerName === p.name && !spAudio.paused;
+
+  const nowAudioKey = nowTrack ? audioKey(p.name, nowTrack.title) : null;
+  const nowHasAudio = nowAudioKey ? !!uploadedAudio[nowAudioKey] : false;
 
   return `
     <h1 class="headline">Musik <span class="hi">Favorit</span></h1>
@@ -579,16 +575,11 @@ function paneMusikHTML(p){
           <input type="range" id="spNowVol" min="0" max="1" step="0.01" value="${isMuted ? 0 : volume}">
         </div>
 
-        <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-          <label class="sp-btn" style="border:1px dashed var(--border); padding:6px 12px; font-size:12px; cursor:pointer; flex:1; justify-content:center;">
-            📁 Upload Audio
-            <input type="file" id="spUploadAudio" accept="audio/*" style="display:none;">
-          </label>
-          <label class="sp-btn" style="border:1px dashed var(--border); padding:6px 12px; font-size:12px; cursor:pointer; flex:1; justify-content:center;">
-            🖼️ Upload Cover
-            <input type="file" id="spUploadCover" accept="image/*" style="display:none;">
-          </label>
-        </div>
+        ${nowTrack && !nowHasAudio ? `
+          <div style="margin-top:14px; padding:10px 12px; border:1px dashed var(--border); border-radius:8px; font-size:11.5px; color:var(--text-dim); text-align:center; font-family:'JetBrains Mono', monospace;">
+            Upload audio buat lagu ini di tombol 📁 di playlist →
+          </div>
+        ` : ""}
       </div>
 
       <div class="sp-playlist">
@@ -608,6 +599,7 @@ function paneMusikHTML(p){
             ${list.map((t, idx) => {
               const isCur = currentTrack && currentTrack.ownerName === p.name && currentTrack.title === t.title;
               const tCover = uploadedCovers[COVER_LS_PREFIX + p.name + "__" + t.title];
+              const hasAudio = !!uploadedAudio[audioKey(p.name, t.title)];
               return `
                 <div class="sp-track ${isCur ? 'is-playing' : ''}" data-title="${t.title}" data-artist="${t.artist}" data-emoji="${t.emoji || '♪'}" data-duration="${t.duration || '0:00'}" data-owner="${p.name}">
                   <span class="sp-track-num">${idx + 1}</span>
@@ -616,10 +608,14 @@ function paneMusikHTML(p){
                     ${tCover ? `<img src="${tCover}" alt="">` : (t.emoji || "♪")}
                   </span>
                   <span class="sp-track-info">
-                    <span class="sp-track-title">${t.title}</span>
+                    <span class="sp-track-title">${t.title}${hasAudio ? ' <span style="color:var(--accent-1);font-size:10px;">●</span>' : ''}</span>
                     <span class="sp-track-artist">${t.artist}</span>
                   </span>
                   <span class="sp-track-dur">${t.duration || "0:00"}</span>
+                  <label class="sp-track-upload" title="Upload audio buat track ini" onclick="event.stopPropagation();">
+                    📁
+                    <input type="file" accept="audio/*" data-owner="${p.name}" data-title="${t.title}" style="display:none;">
+                  </label>
                 </div>
               `;
             }).join("")}
@@ -631,8 +627,6 @@ function paneMusikHTML(p){
 }
 
 function updateNowPlayingUI(){
-  // dipanggil dari openPlayer kalau lagi di tab musik
-  // biar progress bar / cover / judul ikut update
   if (activeTab !== "musik") return;
   const p = activePerson();
   if (!currentTrack || currentTrack.ownerName !== p.name) return;
@@ -640,7 +634,7 @@ function updateNowPlayingUI(){
   const titleEl = contentEl.querySelector(".sp-now-title");
   const artistEl = contentEl.querySelector(".sp-now-artist");
   const coverBox = contentEl.querySelector(".sp-cover");
-  const playBtn = contentEl.querySelector(".sp-now-play, #spNowPlay");
+  const playBtn = contentEl.querySelector("#spNowPlay");
 
   if (titleEl) titleEl.textContent = currentTrack.title;
   if (artistEl) artistEl.textContent = currentTrack.artist;
@@ -650,10 +644,12 @@ function updateNowPlayingUI(){
     const key = COVER_LS_PREFIX + currentTrack.ownerName + "__" + currentTrack.title;
     const src = uploadedCovers[key];
     coverBox.classList.toggle("playing", !spAudio.paused);
+    const isPlaying = coverBox.classList.contains("playing");
+    const eqHTML = isPlaying ? `<div class="sp-eq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>` : "";
     if (src){
-      coverBox.innerHTML = `<img src="${src}" alt="cover">` + (coverBox.classList.contains("playing") ? `<div class="sp-eq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>` : "");
+      coverBox.innerHTML = `<img src="${src}" alt="cover">` + eqHTML;
     } else {
-      coverBox.innerHTML = `<span class="disc">💿</span>` + (coverBox.classList.contains("playing") ? `<div class="sp-eq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>` : "");
+      coverBox.innerHTML = `<span class="disc">💿</span>` + eqHTML;
     }
   }
 }
@@ -668,14 +664,13 @@ function updateTrackHighlight(){
 }
 
 function setupMusicEvents(p){
-  // play dari hero
+  // tombol play di hero
   const playBtn = contentEl.querySelector("#spNowPlay");
   if (playBtn){
     playBtn.addEventListener("click", () => {
       if (!currentTrack || currentTrack.ownerName !== p.name){
-        // belum ada track aktif → mainkan track pertama
         if (p.music.playlist.length === 0){
-          showToast("Playlist kosong, tambahin lagu dulu", "error");
+          showToast("Playlist kosong, tambahin lagu dulu di data.js", "error");
           return;
         }
         openPlayer({ ...p.music.playlist[0], ownerName: p.name });
@@ -738,9 +733,11 @@ function setupMusicEvents(p){
     spAudio.currentTime = pct * spAudio.duration;
   });
 
-  // klik track
+  // klik track → mainkan
   contentEl.querySelectorAll(".sp-track").forEach(el => {
-    el.addEventListener("click", () => {
+    el.addEventListener("click", (e) => {
+      // kalau klik di tombol upload, jangan mainkan
+      if (e.target.closest(".sp-track-upload")) return;
       openPlayer({
         title: el.dataset.title,
         artist: el.dataset.artist,
@@ -751,55 +748,36 @@ function setupMusicEvents(p){
     });
   });
 
-  // upload audio → ke track pertama
-  const audioInput = contentEl.querySelector("#spUploadAudio");
-  if (audioInput) audioInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (p.music.playlist.length === 0){
-      showToast("Tambahin lagu dulu di data.js", "error");
-      return;
-    }
-    const title = p.music.playlist[0].title;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const key = audioKey(p.name, title);
-      try {
-        localStorage.setItem(key, reader.result);
-        uploadedAudio[key] = reader.result;
-        showToast(`Audio dipasang ke "${title}" ✓`, "success");
-        renderContent();
-      } catch {
-        uploadedAudio[key] = reader.result;
-        showToast("Audio kepasang, tapi gagal disimpan (storage penuh)", "error");
-        renderContent();
-      }
-    };
-    reader.readAsDataURL(file);
-  });
-
-  // upload cover → ke track pertama
-  const coverInput = contentEl.querySelector("#spUploadCover");
-  if (coverInput) coverInput.addEventListener("change", async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (p.music.playlist.length === 0) return;
-    try {
-      const dataUrl = await resizeImage(file, 500, 0.85);
-      const title = p.music.playlist[0].title;
-      const key = COVER_LS_PREFIX + p.name + "__" + title;
-      try {
-        localStorage.setItem(key, dataUrl);
-        uploadedCovers[key] = dataUrl;
-        showToast("Cover berhasil disimpan ✓", "success");
-      } catch {
-        uploadedCovers[key] = dataUrl;
-        showToast("Cover kepasang, tapi gagal disimpan", "error");
-      }
-      renderContent();
-    } catch {
-      showToast("Gagal memproses gambar", "error");
-    }
+  // upload audio per-track
+  contentEl.querySelectorAll(".sp-track-upload input[type=file]").forEach(input => {
+    input.addEventListener("change", (e) => {
+      e.stopPropagation();
+      const file = e.target.files[0];
+      if (!file) return;
+      const owner = input.dataset.owner;
+      const title = input.dataset.title;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const key = audioKey(owner, title);
+        try {
+          localStorage.setItem(key, reader.result);
+          uploadedAudio[key] = reader.result;
+          showToast(`Audio dipasang ke "${title}" ✓`, "success");
+          // kalau track ini lagi aktif, langsung set src
+          if (currentTrack && currentTrack.ownerName === owner && currentTrack.title === title){
+            spAudio.src = reader.result;
+            spAudio.play().catch(() => {});
+            spPlayBtn.textContent = "⏸";
+          }
+          renderContent();
+        } catch {
+          uploadedAudio[key] = reader.result;
+          showToast("Audio kepasang, tapi gagal disimpan (storage penuh)", "error");
+          renderContent();
+        }
+      };
+      reader.readAsDataURL(file);
+    });
   });
 }
 
