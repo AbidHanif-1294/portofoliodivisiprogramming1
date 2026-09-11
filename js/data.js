@@ -62,8 +62,7 @@ const PEOPLE = [
       emoji: "🎧",
       note: "Diputar hampir tiap malam pas lagi ngoding project.",
       playlist: [
-        // Tambahin lagu di sini bro, formatnya:
-        // { title: "Kicau Mania", artist: "Ndarboy Genk", duration: "3:49", emoji: "😄" },
+      { title: "Kicau Mania", artist: "Ndarboy Genk", duration: "3:49", emoji: "😄" },
       ]
     }
   },
