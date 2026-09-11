@@ -93,7 +93,7 @@ const PEOPLE = [
       { platform: "Instagram", handle: "@antariksa.aw", icon: "IG", url: "https://instagram.com/antariksa.aw" },
       { platform: "Behance", handle: "behance.net/antariksa", icon: "BE", url: "https://behance.net/antariksa" },
       { platform: "Email", handle: "antariksa.awali@email.com", icon: "@", url: "mailto:antariksa.awali@email.com" },
-      { platform: "WhatsApp", handle: "0813-xxxx-3344", icon: "WA", url: "https://wa.me/62813xxxx3344" }
+      { platform: "WhatsApp", handle: "0895-1904-8477", icon: "WA", url: "https://wa.me/6289519048477" }
     ],
     hobbies: [
       { emoji: "🎨", title: "Menggambar digital", desc: "Suka bikin ilustrasi karakter tiap akhir pekan." },
