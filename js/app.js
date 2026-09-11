@@ -303,7 +303,7 @@ function cardHTML(p, personIdx){
         <div class="barcode-num">${barcodeNumber(personIdx)}</div>
       </div>
     </div>
-    <div class="id-footer">PORTOFOLIO KELAS X-B &middot; 2026</div>
+    <div class="id-footer">DIVISI PROGRAMMING &middot; 2026</div>
   `;
 }
 
