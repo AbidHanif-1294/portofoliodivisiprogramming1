@@ -62,7 +62,9 @@ const PEOPLE = [
       emoji: "🎧",
       note: "Diputar hampir tiap malam pas lagi ngoding project.",
       playlist: [
-      { title: "Kicau Mania", artist: "Ndarboy Genk", duration: "3:49", emoji: "😄" },
+      { title: "Halzion", artist: "Yoasobi", duration: "3:22", emoji: "" },
+      { title: "Tabun", artist: "Yoasobi", duration: "4:23", emoji: "" },
+      { title: "Gunjou", artist: "Yoasobi", duration: "4:22", emoji: "" },
       ]
     }
   },
