@@ -63,7 +63,7 @@ const PEOPLE = [
       note: "Diputar hampir tiap malam pas lagi ngoding project.",
       playlist: [
         // Tambahin lagu di sini bro, formatnya:
-        // { title: "Judul", artist: "Artis", duration: "3:24", emoji: "🌙" },
+        // { title: "Kicau Mania", artist: "Ndarboy Genk", duration: "3:49", emoji: "😄" },
       ]
     }
   },
