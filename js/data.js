@@ -41,7 +41,7 @@ const PEOPLE = [
       { name: "Python", pct: 82 },
       { name: "JavaScript", pct: 75 },
       { name: "MySQL / Database", pct: 70 },
-      { name: "HTML & CSS", pct: 88 }
+      { name: "HTML & CSS", pct: 95 }
     ],
     tools: ["VS Code", "Git & GitHub", "Vercel", "XAMPP", "Figma"],
     contacts: [
