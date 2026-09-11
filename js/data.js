@@ -35,7 +35,8 @@ const PEOPLE = [
     works: [
       { title: "Rhavenfire Classhub", desc: "Aplikasi administrasi kelas sederhana, dipakai uji coba di kelas X-B.", link: "https://classhub-rhavenfire.bolt.host/", stack: ["HTML", "CSS", "TSX"] },
       { title: "Website Portofolio Mandiri", desc: "Website portofolio saya", link: "abid-hanif-abqary.bolt.host", stack: ["HTML", "CSS", "TSX"] },
-      { title: "AI Sandbox simulator", desc: "Dunia Sandbox simulasi kehidupan di dunia fantasi dan AI hidup didalamnya", link: "evoworld-ai-civiliza-lkif.bolt.host/", stack: ["Vite", "React", "TS"] }
+      { title: "AI Sandbox simulator", desc: "Dunia Sandbox simulasi kehidupan di dunia fantasi dan AI hidup didalamnya", link: "evoworld-ai-civiliza-lkif.bolt.host/", stack: ["Vite", "React", "TS"] },
+      { title: "Light Novel Date or Fail", desc: "Karya sastra pertama saya, menceritakan tentang Souta-seorang anak SMA yang sedang berusaha memecahkan misteri di sekolahnya...", link: "https://docs.google.com/document/d/10I-oSyThjpGpRwglDK7QRl7FbrkxZQrK/edit?usp=sharing&ouid=115761267077191214164&rtpof=true&sd=true", stack: ["GDocs", "ChatGPT"] }
     ],
     skills: [
       { name: "Python", pct: 82 },
