@@ -151,7 +151,7 @@ const PEOPLE = [
       emoji: "🎹",
       note: "Instrumental tanpa lirik biar tetap konsen pas analisis data.",
       playlist: [
-        // Tambahin lagu di sini bro
+        { title: "Kicau Mania", artist: "Ndarboy Genk", duration: "3:49", emoji: "😄" },
       ]
     }
   }
