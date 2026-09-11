@@ -782,7 +782,7 @@ main{
 
 .sp-track{
   display: grid;
-  grid-template-columns: 32px 44px 1fr auto auto;
+  grid-template-columns: 32px 44px 1fr auto auto auto;  /* ← tambah 1 kolom */
   gap: 12px;
   align-items: center;
   padding: 8px 10px;
@@ -1100,3 +1100,21 @@ footer{
 }
 .toast.error{ border-color: rgba(255, 95, 86, 0.6); }
 .toast.success{ border-color: rgba(56, 224, 122, 0.6); }
+/* ====== UPLOAD AUDIO PER-TRACK ====== */
+.sp-track-upload{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+.sp-track:hover .sp-track-upload{ opacity: 1; }
+.sp-track-upload:hover{ border-color: var(--accent-1); }
