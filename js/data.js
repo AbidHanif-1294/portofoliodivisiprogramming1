@@ -34,7 +34,7 @@ const PEOPLE = [
     intro: "Halo, perkenalkan namaku <strong>Abid Hanif Abqary</strong>. Aku suka mencoba hal baru seperti membuat AI. Salah satu ideku adalah AI Sales Agent yang terintegrasi langsung dengan website toko online. Dan aku juga suka menulis novel. Salah satu novel buatanku adalah Date or Fail.",
     works: [
       { title: "Rhavenfire Classhub", desc: "Aplikasi administrasi kelas sederhana, dipakai uji coba di kelas X-B.", link: "https://classhub-rhavenfire.bolt.host/", stack: ["HTML", "CSS", "TSX"] },
-      { title: "Website Portofolio Mandiri", desc: "Website portofolio saya", link: "abid-hanif-abqary.bolt.host", stack: ["HTML", "CSS", "TSX'] },
+      { title: "Website Portofolio Mandiri", desc: "Website portofolio saya", link: "abid-hanif-abqary.bolt.host", stack: ["HTML", "CSS", "TSX"] },
       { title: "AI Sandbox simulator", desc: "Dunia Sandbox simulasi kehidupan di dunia fantasi dan AI hidup didalamnya", link: "evoworld-ai-civiliza-lkif.bolt.host/", stack: ["Vite", "React", "TS"] }
     ],
     skills: [
