@@ -57,8 +57,8 @@ const PEOPLE = [
       { emoji: "🎧", title: "Musik lo-fi", desc: "Dengerin lo-fi kalau lagi ngoding biar fokus." }
     ],
     music: {
-      title: "Lo-fi Coding Beats",
-      artist: "Playlist favorit",
+      title: "Kicau Mania",
+      artist: "Ndarboy Genk",
       emoji: "🎧",
       note: "Diputar hampir tiap malam pas lagi ngoding project.",
       playlist: [
