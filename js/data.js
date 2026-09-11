@@ -25,34 +25,34 @@
 const PEOPLE = [
   {
     name: "Abid Hanif Abqary",
-    role: "Fullstack Developer",
-    born: "Malang, 4 Mei 2011",
+    role: "AI Developer & Data Science",
+    born: "Gresik, 13 Februari 2011",
     location: "Malang, Jawa Timur",
     kelas: "X-B",
     photoSeed: "Abid+Hanif&background=1a2235&color=00C2FF&bold=true&size=400",
-    tags: ["Coding", "Gaming", "Futsal"],
-    intro: "Halo, perkenalkan namaku <strong>Abid Hanif Abqary</strong>. Aku suka membangun aplikasi web dari nol, mulai dari desain database sampai tampilan depannya. Lagi fokus belajar arsitektur backend yang rapi.",
+    tags: ["Coding", "Gaming", "Novelist"],
+    intro: "Halo, perkenalkan namaku <strong>Abid Hanif Abqary</strong>. Aku suka mencoba hal baru seperti membuat AI. Salah satu ideku adalah AI Sales Agent yang terintegrasi langsung dengan website toko online. Dan aku juga suka menulis novel. Salah satu novel buatanku adalah Date or Fail.",
     works: [
-      { title: "SiAbsen — Sistem Absensi Sekolah", desc: "Aplikasi absensi berbasis web dengan scan QR, dipakai uji coba di kelas X-B.", link: "github.com/abid/siabsen", stack: ["Node.js", "Express", "MySQL"] },
-      { title: "Toko Bunga Online", desc: "Website e-commerce sederhana untuk tugas praktik kerja lapangan.", link: "github.com/abid/toko-bunga", stack: ["PHP", "Bootstrap"] },
-      { title: "API Cuaca Sekolah", desc: "REST API kecil yang menampilkan info cuaca harian di papan info sekolah.", link: "github.com/abid/api-cuaca", stack: ["Python", "Flask"] }
+      { title: "Rhavenfire Classhub", desc: "Aplikasi administrasi kelas sederhana, dipakai uji coba di kelas X-B.", link: "https://classhub-rhavenfire.bolt.host/", stack: ["HTML", "CSS", "TSX"] },
+      { title: "Website Portofolio Mandiri", desc: "Website portofolio saya", link: "abid-hanif-abqary.bolt.host", stack: ["HTML", "CSS", "TSX'] },
+      { title: "AI Sandbox simulator", desc: "Dunia Sandbox simulasi kehidupan di dunia fantasi dan AI hidup didalamnya", link: "evoworld-ai-civiliza-lkif.bolt.host/", stack: ["Vite", "React", "TS"] }
     ],
     skills: [
-      { name: "JavaScript", pct: 82 },
-      { name: "Node.js & Express", pct: 75 },
+      { name: "Python", pct: 82 },
+      { name: "JavaScript", pct: 75 },
       { name: "MySQL / Database", pct: 70 },
       { name: "HTML & CSS", pct: 88 }
     ],
-    tools: ["VS Code", "Git & GitHub", "Postman", "XAMPP", "Figma"],
+    tools: ["VS Code", "Git & GitHub", "Vercel", "XAMPP", "Figma"],
     contacts: [
-      { platform: "Instagram", handle: "@abid.hn", icon: "IG", url: "https://instagram.com/abid.hn" },
-      { platform: "GitHub", handle: "github.com/abidhn", icon: "GH", url: "https://github.com/abidhn" },
-      { platform: "Email", handle: "abid.hanif@email.com", icon: "@", url: "mailto:abid.hanif@email.com" },
-      { platform: "WhatsApp", handle: "0812-xxxx-1122", icon: "WA", url: "https://wa.me/62812xxxx1122" }
+      { platform: "Instagram", handle: "@abidhanifabqary", icon: "IG", url: "https://instagram.com/abidhanifabqary" },
+      { platform: "GitHub", handle: "github.com/AbidHanif-1294", icon: "GH", url: "https://github.com/abidhn" },
+      { platform: "Email", handle: "abidhanifmtsn@email.com", icon: "@", url: "mailto:abidhanifmtsn@email.com" },
+      { platform: "WhatsApp", handle: "0817-4721-097", icon: "WA", url: "https://wa.me/628174721097" }
     ],
     hobbies: [
       { emoji: "🎮", title: "Gaming", desc: "Suka main game strategi dan sesekali ngoding mod kecil-kecilan." },
-      { emoji: "⚽", title: "Futsal", desc: "Ikut tim futsal sekolah tiap hari Jumat sore." },
+      { emoji: "📖", title: "Novelist", desc: "Penulis novel pemula" },
       { emoji: "📺", title: "Nonton tutorial", desc: "Hobi nonton video coding dan bikin ulang projectnya." },
       { emoji: "🎧", title: "Musik lo-fi", desc: "Dengerin lo-fi kalau lagi ngoding biar fokus." }
     ],
@@ -71,7 +71,7 @@ const PEOPLE = [
   {
     name: "Antariksa Awali Asyraaf Setyo Widad",
     role: "UI/UX Designer & Frontend",
-    born: "Surabaya, 21 Agustus 2011",
+    born: "Malang, 21 Agustus 2011",
     location: "Malang, Jawa Timur",
     kelas: "X-B",
     photoSeed: "Antariksa+Awali&background=1a1e35&color=7C4DFF&bold=true&size=400",
