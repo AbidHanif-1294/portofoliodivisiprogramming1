@@ -117,7 +117,7 @@ const PEOPLE = [
   {
     name: "Ahmad Fauzan Pratama",
     role: "Data Science & AI Enthusiast",
-    born: "Malang, 11 Maret 2011",
+    born: "Banjarmasin,30 Januari 2011",
     location: "Malang, Jawa Timur",
     kelas: "X-D",
     photoSeed: "Ahmad+Fauzan&background=1a2a1f&color=38e07a&bold=true&size=400",
